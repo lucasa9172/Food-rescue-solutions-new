@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Order Food | Food Rescue Solutions</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <style>
+      /* BRAND COLORS */
+      :root {
+        --primary: #28a745;
+        --primary-dark: #1e7e34;
+        --bg: #f8f9fa;
+      }
+
+      /* GLOBAL */
+      body {
+        font-family: 'Segoe UI', sans-serif;
+        background: var(--bg);
+        color: #222;
+      }
+
+      /* NAVBAR */
+      .navbar {
+        padding: 15px 0;
+      }
+
+      .navbar a {
+        color: #333;
+        font-weight: 500;
+        text-decoration: none;
+      }
+
+      .navbar a:hover {
+        color: var(--primary);
+      }
+
+      /* HERO */
+      .hero,
+      .hero-about,
+      .contact-hero {
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+          url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092')
+            center/cover;
+        color: white;
+      }
+
+      /* BUTTONS */
+      .btn-success {
+        background-color: var(--primary) !important;
+        border: none;
+        border-radius: 10px;
+        transition: 0.3s;
+      }
+
+      .btn-success:hover {
+        background-color: var(--primary-dark) !important;
+        transform: translateY(-2px);
+      }
+
+      /* CARDS */
+      .card,
+      .service-card,
+      .contact-card {
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+        transition: 0.3s;
+      }
+
+      .card:hover,
+      .service-card:hover {
+        transform: translateY(-5px);
+      }
+
+      /* SECTIONS */
+      .container {
+        max-width: 1100px;
+      }
+
+      /* HEADINGS */
+      h1,
+      h2,
+      h3 {
+        font-weight: 700;
+      }
+
+      /* FOOTER */
+      footer {
+        background: white;
+        border-top: 1px solid #eee;
+      }
+
+      /* ANIMATION */
+      .fade-in {
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeIn 0.8s ease forwards;
+      }
+
+      @keyframes fadeIn {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* REVIEWS */
+      .review-box {
+        background: #f1f1f1;
+        border-radius: 10px;
+        padding: 10px;
+        margin-top: 10px;
+      }
+    </style>
+
+    <style>
+      #cart {
+        width: 320px;
+        right: -320px;
+        transition: 0.3s;
+        z-index: 1000;
+      }
+      #cart.open {
+        right: 0;
+      }
+
+      .star {
+        color: gold;
+      }
+      .review-box {
+        background: #f1f1f1;
+        border-radius: 10px;
+        padding: 10px;
+        margin-top: 10px;
+      }
+    </style>
+    <style>
+      .btn-success {
+        background-color: #28a745 !important;
+        border: none !important;
+      }
+
+      .btn-outline-light:hover {
+        color: #28a745 !important;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg bg-white shadow-sm sticky-top">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">
+          <img src="logo.png" width="160" />
+        </a>
+
+        <div class="ms-auto">
+          <a href="index.html" class="me-3">Home</a>
+          <a href="about.html" class="me-3">About</a>
+          <a href="services.html" class="me-3">Services</a>
+          <a href="business.html" class="me-3">Order</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- CART BUTTON -->
+    <div class="position-fixed top-0 end-0 m-3">
+      <button class="btn btn-success" onclick="toggleCart()">
+        Cart (<span id="cart-count">0</span>)
+      </button>
+    </div>
+
+    <!-- CART -->
+    <div id="cart" class="bg-white shadow p-3 position-fixed top-0 h-100">
+      <h4>Your Cart</h4>
+      <p class="text-muted">Pickup within 1 hour</p>
+      <ul id="cart-items" class="list-group mb-3"></ul>
+      <h5>Total: $<span id="cart-total">0.00</span></h5>
+      <button class="btn btn-success w-100 mt-2" onclick="checkout()">
+        Checkout
+      </button>
+    </div>
+
+    <!-- HEADER -->
+    <div class="container mt-5 text-center">
+      <h1>Order Rescue Meals</h1>
+      <p>Affordable meals rescued from local restaurants</p>
+    </div>
+
+    <!-- FOOD ITEMS -->
+    <div class="container mt-4">
+      <div class="row g-4">
+        <!-- ITEM -->
+        <div class="col-md-4">
+          <div class="card p-2">
+            <img
+              src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d"
+              class="card-img-top"
+            />
+            <div class="card-body">
+              <h5>Italian Pasta Meal</h5>
+
+              <p class="star">★★★★★ (4.8)</p>
+
+              <p>$6.99</p>
+
+              <button
+                class="btn btn-success w-100"
+                onclick="addToCart('Italian Pasta Meal', 6.99)"
+              >
+                Add to Cart
+              </button>
+
+              <!-- REVIEWS -->
+              <div id="reviews-pasta">
+                <div class="review-box">"Amazing taste for cheap!"</div>
+              </div>
+
+              <input
+                type="text"
+                class="form-control mt-2"
+                placeholder="Write a review..."
+                id="input-pasta"
+              />
+              <button
+                class="btn btn-sm btn-dark mt-2 w-100"
+                onclick="addReview('pasta')"
+              >
+                Submit
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ITEM 2 -->
+        <div class="col-md-4">
+          <div class="card p-2">
+            <img
+              src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c"
+              class="card-img-top"
+            />
+            <div class="card-body">
+              <h5>Veggie Pack</h5>
+              <p class="star">★★★★☆ (4.5)</p>
+              <p>$4.99</p>
+
+              <button
+                class="btn btn-success w-100"
+                onclick="addToCart('Veggie Pack', 4.99)"
+              >
+                Add to Cart
+              </button>
+
+              <div id="reviews-veggie">
+                <div class="review-box">"Healthy and fresh!"</div>
+              </div>
+
+              <input
+                type="text"
+                class="form-control mt-2"
+                placeholder="Write a review..."
+                id="input-veggie"
+              />
+              <button
+                class="btn btn-sm btn-dark mt-2 w-100"
+                onclick="addReview('veggie')"
+              >
+                Submit
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ITEM 3 -->
+        <div class="col-md-4">
+          <div class="card p-2">
+            <img
+              src="https://www.recipesbyella.com/wp-content/uploads/2025/01/joumi1_97519_Capture_the_essence_of_This_Light_and_refreshing___9402969f-dd6f-4d21-a9cd-90655f5a497c-819x1024.jpg"
+              class="card-img-top"
+            />
+            <div class="card-body">
+              <h5>Chicken Bowl</h5>
+              <p class="star">★★★★☆ (4.6)</p>
+              <p>$5.49</p>
+
+              <button
+                class="btn btn-success w-100"
+                onclick="addToCart('Chicken Bowl', 5.49)"
+              >
+                Add to Cart
+              </button>
+
+              <div id="reviews-chicken">
+                <div class="review-box">"Great protein meal!"</div>
+              </div>
+
+              <input
+                type="text"
+                class="form-control mt-2"
+                placeholder="Write a review..."
+                id="input-chicken"
+              />
+              <button
+                class="btn btn-sm btn-dark mt-2 w-100"
+                onclick="addReview('chicken')"
+              >
+                Submit
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HOW IT WORKS -->
+    <div class="container mt-5 text-center">
+      <h3>How It Works</h3>
+      <div class="row mt-4">
+        <div class="col-md-4">
+          <h5>Browse</h5>
+          <p>Find meals near you</p>
+        </div>
+        <div class="col-md-4">
+          <h5>Add to Cart</h5>
+          <p>Select multiple items</p>
+        </div>
+        <div class="col-md-4">
+          <h5>Pick Up</h5>
+          <p>Collect your food</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="text-center p-4 mt-5">
+      <img src="logo.png" width="140" />
+      <p>© 2026 Food Rescue Solutions</p>
+    </footer>
+
+    <!-- JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      let cart = [];
+
+      function addToCart(name, price) {
+        let item = cart.find((i) => i.name === name);
+        if (item) {
+          item.qty++;
+        } else {
+          cart.push({ name, price, qty: 1 });
+        }
+        updateCart();
+      }
+
+      function updateCart() {
+        let cartItems = document.getElementById('cart-items');
+        let total = 0;
+        cartItems.innerHTML = '';
+
+        cart.forEach((item, index) => {
+          total += item.price * item.qty;
+          cartItems.innerHTML += `
+      <li class="list-group-item d-flex justify-content-between">
+        ${item.name} x${item.qty}
+        <span>$${(item.price * item.qty).toFixed(2)}
+        <button class="btn btn-sm btn-danger" onclick="removeItem(${index})">X</button></span>
+      </li>`;
+        });
+
+        document.getElementById('cart-total').innerText = total.toFixed(2);
+        document.getElementById('cart-count').innerText = cart.length;
+      }
+
+      function removeItem(i) {
+        cart.splice(i, 1);
+        updateCart();
+      }
+
+      function toggleCart() {
+        document.getElementById('cart').classList.toggle('open');
+      }
+
+      function checkout() {
+        if (cart.length === 0) {
+          alert('Cart is empty!');
+          return;
+        }
+        alert('Order placed successfully!');
+        cart = [];
+        updateCart();
+      }
+
+      /* REVIEWS */
+      function addReview(type) {
+        let input = document.getElementById('input-' + type);
+        let box = document.getElementById('reviews-' + type);
+
+        if (input.value.trim() !== '') {
+          box.innerHTML += `<div class="review-box">"${input.value}"</div>`;
+          input.value = '';
+        }
+      }
+    </script>
+  </body>
+</html>

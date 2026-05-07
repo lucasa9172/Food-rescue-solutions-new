@@ -1,0 +1,227 @@
+/*
+
+body {
+  background-color: #f8f9fa !important;
+}
+
+.hero,
+.hero-about,
+.contact-hero {
+  background-color: #1e7e34 !important;
+  color: white;
+}
+
+
+
+:root {
+  --primary: #28a745;
+  --primary-dark: #1e7e34;
+  --light-bg: #f8f9fa;
+  --text-dark: #222;
+  --card-shadow: rgba(0,0,0,0.1);
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: var(--light-bg);
+  color: var(--text-dark);
+}
+
+.navbar {
+  background: white;
+}
+
+.navbar a {
+  color: var(--text-dark);
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.navbar a:hover {
+  color: var(--primary);
+}
+
+.btn-success,
+.btn-primary {
+  background-color: var(--primary) !important;
+  border: none;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+.btn-success:hover,
+.btn-primary:hover {
+  background-color: var(--primary-dark) !important;
+  transform: translateY(-2px);
+}
+
+h1, h2, h3, h4 {
+  color: #1b1b1b;
+}
+
+.card, .service-card, .feature-box, .contact-card {
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 6px 18px var(--card-shadow);
+  transition: 0.3s;
+}
+
+.card:hover, .service-card:hover {
+  transform: translateY(-5px);
+}
+
+a {
+  color: var(--primary);
+}
+
+a:hover {
+  color: var(--primary-dark);
+}
+
+.hero, .hero-about, .contact-hero {
+  background-color: var(--primary-dark);
+}
+
+footer {
+  background: white;
+  border-top: 1px solid #eee;
+}
+*/
+
+/* BRAND COLORS */
+:root {
+  --primaryx: #28a745;
+  --primary-dark: #1e7e34;
+  --back-ground: #f8f9fa;
+}
+
+/* GLOBAL */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: var(--back-ground);
+  color: #222;
+}
+
+/* NAVBAR */
+.navbar {
+  padding: 15px 0;
+}
+
+.navbar a {
+  color: #333;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.navbar a:hover {
+  color: var(--primary);
+}
+
+.stuff {
+  background-color: #228b22;
+  padding: 20px;
+}
+/* HERO */
+.hero,
+.hero-about,
+.contact-hero {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092')
+      center/cover;
+  color: white;
+}
+
+/* BUTTONS */
+.page-btns {
+  background-color: var(--primaryx) !important;
+  border: none;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+.btn-success:hover {
+  background-color: var(--primary-dark) !important;
+  transform: translateY(-2px);
+}
+
+/* CARDS */
+.card,
+.service-card,
+.contact-card {
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
+}
+
+.card:hover,
+.service-card:hover {
+  transform: translateY(-5px);
+}
+
+/* SECTIONS */
+.container {
+  max-width: 1100px;
+}
+
+/* HEADINGS */
+h1,
+h2,
+h3 {
+  font-weight: 700;
+}
+
+/* FOOTER */
+footer {
+  background: white;
+  border-top: 1px solid #eee;
+}
+
+/* ANIMATION */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeIn 0.8s ease forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* REVIEWS */
+.review-box {
+  background: #f1f1f1;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 10px;
+}
+.hero {
+  background: url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092')
+    center/cover;
+  height: 500px;
+  position: relative;
+  color: white;
+}
+.hero-overlay {
+  background: rgba(0, 0, 0, 0.6);
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.feature-box {
+  background: white;
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+.btn-success {
+  background-color: #28a745 !important;
+  border: none !important;
+}
+
+.btn-outline-light:hover {
+  color: #28a745 !important;
+}
